@@ -6,10 +6,27 @@
   %t "skip"
 }
 
+////////////////////////////////////////////////////////////////////////////
+// own actions
+
 %action Set_Ist_Gut_Halb(lhs) {
 	%t lhs + "->istGut = 1/2"
 	{
 		istGut(v) = (lhs(v) & 1/2) | (!lhs(v) & istGut(v))
+	}
+}
+
+%action Set_Ist_Gut_False(lhs) {
+	%t lhs + "->istGut = false"
+	{
+		istGut(v) = (lhs(v) & 0) | (!lhs(v) & istGut(v))
+	}
+}
+
+%action Set_Ist_Gut_True(lhs) {
+	%t lhs + "->istGut = true"
+	{
+		istGut(v) = (lhs(v) & 1) | (!lhs(v) & istGut(v))
 	}
 }
 
@@ -18,6 +35,12 @@
 	{
 		istSchlecht(v) = !istGut(v)
 	}
+}
+
+%action Assert_No_Good_n_Bad() {
+	%t "Assert_No_Good_n_Bad()"
+	%p E(v) istGut(v) <-> istSchlecht(v)
+	%message ( E(v) istGut(v) <-> istSchlecht(v) ) -> "There is a linse that is good and bad or neither good nor bad!"
 }
 
 
