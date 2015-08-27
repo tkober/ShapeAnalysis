@@ -6,6 +6,20 @@
   %t "skip"
 }
 
+%action Set_Ist_Gut_Halb(lhs) {
+	%t lhs + "->istGut = 1/2"
+	{
+		istGut(v) = (lhs(v) & 1/2) | (!lhs(v) & istGut(v))
+	}
+}
+
+%action Set_Ist_Schlecht_Opposite(lhs) {
+	%t lhs + "->istSchlecht = !" + lhs + "->istGut"
+	{
+		istSchlecht(v) = !istGut(v)
+	}
+}
+
 
 ///////////////////////////////////////////////////////////////////////////
 // Actions for statements manipulating pointer variables and pointer fields

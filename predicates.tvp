@@ -13,6 +13,8 @@ foreach (z in PVar) {
 // The predicate n represents the n field of the list data type.
 %p n(v_1, v_2) function acyclic
 
+%p istGut(v)
+%p istSchlecht(v)
 
 /////////////////////////////////////////////
 // Instrumentation (i.e., derived) predicates
