@@ -37,10 +37,43 @@
 	}
 }
 
+%action Is_Good(lhs) {
+	%t lhs + "->istGut == true"
+	%f { lhs(v) & istGut(v) }
+	%p E(v) lhs(v) & istGut(v)
+}
+
+%action Is_Not_Good(lhs) {
+	%t lhs + "->istGut == false"
+	%f { lhs(v) & istSchlecht(v) }
+	%p A(v) !(lhs(v) & istGut(v))
+}
+
+///////////////////////////////////////////////////////////////////////////
+// own assertions
+
+%action Assert_Good_Linsen(lhs) {
+	%t "Assert_Good_Linsen()"
+	%p E(v) r[n, lhs](v) & !istGut(v)
+	%message ( E(v) r[n, lhs](v) & !istGut(v) ) -> "There is a linse reachable from guteLinsen which is not a good one!"
+}
+
+%action Assert_Bad_Linsen(lhs) {
+	%t "Assert_Bad_Linsen()"
+	%p E(v) r[n, lhs](v) & !istSchlecht(v)
+	%message ( E(v) r[n, lhs](v) & !istSchlecht(v) ) -> "There is a linse reachable from schlechteLinsen which is not a bad one!"
+}
+
+%action Assert_No_Leak_End(good, bad) {
+	%t "Assert_No_Leak_End()"
+	%p E(v) (r[n, good](v) & r[n, bad](v)) | (!r[n, bad](v) & !r[n, good](v))
+	%message ( E(v) (r[n, good](v) & r[n, bad](v)) | (!r[n, bad](v) & !r[n, good](v)) ) -> "There is a linse that is not reachable or reachable from guteLinsen and schlechteLinsen!"
+}
+
 %action Assert_No_Good_n_Bad() {
 	%t "Assert_No_Good_n_Bad()"
 	%p E(v) istGut(v) <-> istSchlecht(v)
-	%message ( E(v) istGut(v) <-> istSchlecht(v) ) -> "There is a linse that is good and bad or neither good nor bad!"
+	%message ( E(v) istGut(v) <-> istSchlecht(v) ) -> "There is a linse that is good and bad or neither good nor bad or not definitive one of both!"
 }
 
 
