@@ -33,7 +33,7 @@
 %action Set_Ist_Schlecht_Opposite(lhs) {
 	%t lhs + "->istSchlecht = !" + lhs + "->istGut"
 	{
-		istSchlecht(v) = !istGut(v)
+		istSchlecht(v) = !istGut(v) & !isArbitrary(v)
 	}
 }
 
@@ -49,8 +49,26 @@
 	%p A(v) !(lhs(v) & istGut(v))
 }
 
+%action Free_Arbitrary() {
+	%t "Free_Arbitrary()"
+	{
+    t[n](v_1, v_2) = t[n](v_1, v_2)
+    foreach(z in PVar) {
+      r[n,z](v) = r[n,z](v)
+    }
+    is[n](v) = is[n](v)  
+  }
+	%retain !isArbitrary(v) | |/{r[n, z](v): z in PVar}
+}
+
 ///////////////////////////////////////////////////////////////////////////
 // own assertions
+
+%action Assert_No_Reachable_Arbitrary() {
+	%t "Assert_No_Arbitrary()"
+	%p E(v) isArbitrary(v) & |/{r[n, z](v): z in PVar}
+	%message ( E(v) isArbitrary(v) ) -> "There is a pointer pointing to an arbitrary logical individual, i.e., there is somewhere an uninitialized variable that is used!"
+}
 
 %action Assert_Good_Linsen(lhs) {
 	%t "Assert_Good_Linsen()"
@@ -66,14 +84,14 @@
 
 %action Assert_No_Leak_End(good, bad) {
 	%t "Assert_No_Leak_End()"
-	%p E(v) (r[n, good](v) & r[n, bad](v)) | (!r[n, bad](v) & !r[n, good](v))
-	%message ( E(v) (r[n, good](v) & r[n, bad](v)) | (!r[n, bad](v) & !r[n, good](v)) ) -> "There is a linse that is not reachable or reachable from guteLinsen and schlechteLinsen!"
+	%p E(v) (r[n, good](v) & r[n, bad](v)) | (!r[n, bad](v) & !r[n, good](v) & !isArbitrary(v))
+	%message ( E(v) (r[n, good](v) & r[n, bad](v)) | (!r[n, bad](v) & !r[n, good](v) & !isArbitrary(v)) ) -> "There is a linse that is not reachable or reachable from guteLinsen and schlechteLinsen!"
 }
 
 %action Assert_No_Good_n_Bad() {
 	%t "Assert_No_Good_n_Bad()"
-	%p E(v) istGut(v) <-> istSchlecht(v)
-	%message ( E(v) istGut(v) <-> istSchlecht(v) ) -> "There is a linse that is good and bad or neither good nor bad or not definitive one of both!"
+	%p E(v) (istGut(v) <-> istSchlecht(v)) & !isArbitrary(v)
+	%message ( E(v) (istGut(v) <-> istSchlecht(v)) & !isArbitrary(v) ) -> "There is a linse that is good and bad or neither good nor bad or not definitive one of both!"
 }
 
 

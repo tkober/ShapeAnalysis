@@ -16,6 +16,8 @@ foreach (z in PVar) {
 %p istGut(v)
 %p istSchlecht(v)
 
+%p isArbitrary(v)
+
 /////////////////////////////////////////////
 // Instrumentation (i.e., derived) predicates
 
