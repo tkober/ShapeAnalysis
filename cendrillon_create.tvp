@@ -15,24 +15,25 @@
 // Transition system for a function that creates a linsenTopf
 
 
-L1  Malloc_L(linse)							L1a
-L1a uninterpreted()							L2
+L1  Malloc_L(linse)							L1a		// linse = malloc(sizeof(Linse));
+L1a uninterpreted()							L2			// linse->istGut = (rand() % 2) ? true: false;
 L1a uninterpreted()							L2a
 L2  Set_Ist_Gut_True(linse)				L3
 L2a Set_Ist_Gut_False(linse)				L3
-L3  Set_Ist_Schlecht_Opposite(linse)	L4
-L4  Copy_Var_L(linsenTopf, linse)		L5
-L5  Copy_Var_L(topf, linsenTopf)			L6
-L6  uninterpreted()							L7
+L3  Set_Ist_Schlecht_Opposite(linse)	L4			// linse->istSchlecht = !linse->istGut;
+L4  Copy_Var_L(linsenTopf, linse)		L5			// linsenTopf = linse;
+L5  Copy_Var_L(topf, linsenTopf)			L6			// topf = linsenTopf;
+L6  uninterpreted()							L7			// while( i <= n ) {
 L6  uninterpreted()							exit
-L7  Malloc_L(linse)							L7a
-L7a uninterpreted()							L8
+L7  Malloc_L(linse)							L7a		//		linse = malloc(sizeof(Linse));
+L7a uninterpreted()							L8			//		linse->istGut = (rand() % 2) ? true : false;
 L7a uninterpreted()							L8a
 L8  Set_Ist_Gut_True(linse)				L9
 L8a Set_Ist_Gut_False(linse)				L9
-L9  Set_Ist_Schlecht_Opposite(linse)	L10
-L10 Set_Next_L(topf, linse)				L11
-L11 Copy_Var_L(topf, linse)				L6
+L9  Set_Ist_Schlecht_Opposite(linse)	L10		// 	linse->istSchlecht = !linse->istGut;
+L10 Set_Next_L(topf, linse)				L11		//		topf->next = linse;
+L11 Copy_Var_L(topf, linse)				L6			//		topf = linse;
+																// }
 
 exit Assert_No_Good_n_Bad()				error
 exit Assert_ListInvariants(linsenTopf) error

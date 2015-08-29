@@ -1,0 +1,15 @@
+%n = {linsenTopf, linse, topf, guteLinsen, schlechteLinsen}
+%p = {
+	t[n] = {linse->linse, topf->topf, guteLinsen->guteLinsen, schlechteLinsen->schlechteLinsen, linsenTopf->linsenTopf}
+	r[n, linse] = {linse}
+	r[n, topf] = {topf}
+	r[n, guteLinsen] = {guteLinsen}
+	r[n, schlechteLinsen] = {schlechteLinsen}
+	r[n, linsenTopf] = {linsenTopf}
+	isArbitrary = {linse, topf, guteLinsen, schlechteLinsen, linsenTopf}
+	linse = {linse}
+	topf = {topf}
+	guteLinsen = {guteLinsen}
+	schlechteLinsen = {schlechteLinsen}
+	linsenTopf = {linsenTopf}
+}
