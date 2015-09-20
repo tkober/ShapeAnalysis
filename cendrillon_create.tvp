@@ -1,6 +1,8 @@
 ///////
 // Sets
 
+// Milestone A Analysis
+
 %s PVar {linsenTopf, linse, topf}
 
 #include "predicates.tvp"
@@ -35,6 +37,13 @@ L10 Set_Next_L(topf, linse)				L11		//		topf->next = linse;
 L11 Copy_Var_L(topf, linse)				L6			//		topf = linse;
 																// }
 
-exit Assert_No_Good_n_Bad()				error
-exit Assert_ListInvariants(linsenTopf) error
-exit Assert_No_Leak(linsenTopf)			error
+exit Set_Null_L(linse)						exitA
+exitA Set_Null_L(topf)						exitB
+
+exitB Assert_No_Good_n_Bad()				error
+exitB Assert_ListInvariants(linsenTopf) error
+exitB Assert_No_Leak(linsenTopf)			error
+
+%%
+
+L1, exitB
