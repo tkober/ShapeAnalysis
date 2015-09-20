@@ -33,7 +33,7 @@
 %action Set_Ist_Schlecht_Opposite(lhs) {
 	%t lhs + "->istSchlecht = !" + lhs + "->istGut"
 	{
-		istSchlecht(v) = !istGut(v) & !isArbitrary(v)
+		istSchlecht(v) = (!lhs(v) & istSchlecht(v)) | (lhs(v) & !istGut(v) & !isArbitrary(v))
 	}
 }
 
