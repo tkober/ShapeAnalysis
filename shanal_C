@@ -1,0 +1,18 @@
+#! /bin/bash
+
+if [ -n "$SHANAL_HOME" ]; then
+  cd "$SHANAL_HOME"
+fi
+
+tvla cendrillon_C.tvp cendrillon_C.tvs -dot cendrillon_C.dot
+dot -Tps cendrillon_C.dot -o cendrillon_C.ps
+ps2pdf cendrillon_C.ps cendrillon_C.pdf
+
+rm *.dot
+rm *.tvp.out.tvs
+rm *.ps
+
+OS=`uname`
+if [[ "$OS" == 'Darwin' ]]; then
+  open cendrillon_C.pdf
+fi

@@ -1,0 +1,18 @@
+#! /bin/bash
+
+if [ -n "$SHANAL_HOME" ]; then
+  cd "$SHANAL_HOME"
+fi
+
+tvla cendrillon_sort_fixed.tvp cendrillon_sort.tvs -dot cendrillon_sort_fixed.dot
+dot -Tps cendrillon_sort_fixed.dot -o cendrillon_sort_fixed.ps
+ps2pdf cendrillon_sort_fixed.ps cendrillon_sort_fixed.pdf
+
+rm *.dot
+rm *.tvp.out.tvs
+rm *.ps
+
+OS=`uname`
+if [[ "$OS" == 'Darwin' ]]; then
+  open cendrillon_sort_fixed.pdf
+fi

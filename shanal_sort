@@ -4,9 +4,9 @@ if [ -n "$SHANAL_HOME" ]; then
   cd "$SHANAL_HOME"
 fi
 
-tvla cendrillon_sort.tvp cendrillon_sort.tvs -dot ~cendrillon_sort.dot
-dot -Tps ~cendrillon_sort.dot -o ~cendrillon_sort.ps
-ps2pdf ~cendrillon_sort.ps cendrillon_sort.pdf
+tvla cendrillon_sort.tvp cendrillon_sort.tvs -dot cendrillon_sort.dot
+dot -Tps cendrillon_sort.dot -o cendrillon_sort.ps
+ps2pdf cendrillon_sort.ps cendrillon_sort.pdf
 
 rm *.dot
 rm *.tvp.out.tvs

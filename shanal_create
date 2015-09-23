@@ -4,9 +4,9 @@ if [ -n "$SHANAL_HOME" ]; then
   cd "$SHANAL_HOME"
 fi
 
-tvla cendrillon_create.tvp cendrillon_create.tvs -dot ~cendrillon_create.dot
-dot -Tps ~cendrillon_create.dot -o ~cendrillon_create.ps
-ps2pdf ~cendrillon_create.ps cendrillon_create.pdf
+tvla cendrillon_create.tvp cendrillon_create.tvs -dot cendrillon_create.dot
+dot -Tps cendrillon_create.dot -o cendrillon_create.ps
+ps2pdf cendrillon_create.ps cendrillon_create.pdf
 
 rm *.dot
 rm *.tvp.out.tvs
