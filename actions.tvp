@@ -1,8 +1,8 @@
-%action uninterpreted() { 
+%action uninterpreted() {
   %t "uninterpreted"
 }
 
-%action skip() { 
+%action skip() {
   %t "skip"
 }
 
@@ -56,7 +56,7 @@
     foreach(z in PVar) {
       r[n,z](v) = r[n,z](v)
     }
-    is[n](v) = is[n](v)  
+    is[n](v) = is[n](v)
   }
 	%retain !isArbitrary(v) | |/{r[n, z](v): z in PVar}
 }
@@ -107,9 +107,9 @@
 
 %action Copy_Var_L(lhs, rhs) {
   %t lhs + " = " + rhs
-  %f { rhs(v) } 
+  %f { rhs(v) }
   {
-    lhs(v) = rhs(v) 
+    lhs(v) = rhs(v)
   }
 }
 
@@ -137,7 +137,7 @@
     foreach(z in PVar) {
       r[n,z](v) = r[n,z](v)
     }
-    is[n](v) = is[n](v)  
+    is[n](v) = is[n](v)
   }
   %retain !lhs(v)
 }
@@ -154,10 +154,10 @@
 
 %action Set_Next_Null_L(lhs) {
   %t lhs + "->" + n + " = NULL"
-  %f { 
+  %f {
        lhs(v),
        // optimized change-formula for t[n] update-formula
-       E(v_1, v_2) lhs(v_1) & n(v_1, v_2) & t[n](v_2, v)   
+       E(v_1, v_2) lhs(v_1) & n(v_1, v_2) & t[n](v_2, v)
      }
   %message (!E(v) lhs(v)) -> "Illegal dereference to\n" +
                              n + " component of " + lhs
@@ -176,7 +176,7 @@
      }
   %message (E(v_1, v_2) lhs(v_1) & n(v_1, v_2)) ->
            "Internal Error! " + lhs + "->" + n + " != NULL"
-  %message (E(v_1, v_2) lhs(v_1) & rhs(v_2) & t[n](v_2, v_1)) -> 
+  %message (E(v_1, v_2) lhs(v_1) & rhs(v_2) & t[n](v_2, v_1)) ->
            "A cycle may be introduced\nby assignment " + lhs + "->" + n + "=" + rhs
   {
     n(v_1, v_2) = n(v_1, v_2) | lhs(v_1) & rhs(v_2)
@@ -189,25 +189,25 @@
 
 %action Is_Not_Null_Var(lhs) {
   %t lhs + " != NULL"
-  %f { lhs(v) } 
+  %f { lhs(v) }
   %p E(v) lhs(v)
 }
 
 %action Is_Null_Var(lhs) {
   %t lhs + " == NULL"
-  %f { lhs(v) } 
+  %f { lhs(v) }
   %p !(E(v) lhs(v))
 }
 
 %action Is_Eq_Var(lhs, rhs) {
   %t lhs + " == " + rhs
-  %f { lhs(v), rhs(v) } 
+  %f { lhs(v), rhs(v) }
   %p A(v) lhs(v) <-> rhs(v)
 }
 
 %action Is_Not_Eq_Var(lhs, rhs) {
   %t lhs + " != " + rhs
-  %f { lhs(v), rhs(v) } 
+  %f { lhs(v), rhs(v) }
   %p !A(v) lhs(v) <-> rhs(v)
 }
 
@@ -219,7 +219,7 @@
   %t "assertListInvariants(" + lhs + ")"
   %f { lhs(v) }
   %p E(v) r[n,lhs](v) & is[n](v)
-  %message ( E(v) r[n,lhs](v) & is[n](v) ) -> 
+  %message ( E(v) r[n,lhs](v) & is[n](v) ) ->
            "The list pointed by " + lhs + " may be shared!"
 }
 
@@ -227,6 +227,6 @@
   %t "assertNoLeak(" + lhs + ")"
   %f { lhs(v) }
   %p E(v) !r[n,lhs](v)
-  %message ( E(v) !r[n,lhs](v) ) -> 
+  %message ( E(v) !r[n,lhs](v) ) ->
            "There may be a list element not reachable from variable " + lhs + "!"
 }
