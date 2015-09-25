@@ -51,9 +51,16 @@
 	\begin{figure}[H]
 		\centering
 		\includegraphics[width=\textwidth]{#1/#1#2.pdf}
-		\label{#1#2}
+		\caption{}
+		\label{fig:#1#2}
 	\end{figure}
 }
+
+
+\newcommand{\analysispageref}[2]{
+	(siehe \autoref{fig:#1#2})
+}
+
 
 \title{Cendrillon Sort}
 \subtitle{Shape Analysis}
