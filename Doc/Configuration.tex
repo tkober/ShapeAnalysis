@@ -6,6 +6,43 @@
 \usepackage{biblatex}
 \usepackage{float}
 \usepackage{hyperref}
+\usepackage{listings}
+
+
+\newcommand{\textfile}[1]{
+	\lstinputlisting[numbers=left, numberstyle=\color{gray}]{#1}
+}
+
+\newcommand{\cfile}[1]{
+	\lstinputlisting[style=customc, numbers=left, numberstyle=\color{gray}]{#1}
+}
+
+\newcommand{\textsnippet}[3]{
+	\lstinputlisting[basicstyle=\tiny, firstline=#2, lastline=#3]{#1}
+}
+
+\newcommand{\csnippet}[3]{
+	\lstinputlisting[style=customc, firstline=#2, lastline=#3]{#1}
+}
+
+\lstset{
+	frame=single,
+ 	tabsize=2,
+ 	breaklines=true,
+}
+
+\lstdefinestyle{customc}{
+	basicstyle=\tiny,
+  	belowcaptionskip=1\baselineskip,
+  	breaklines=true,
+  	language=C,
+  	showstringspaces=false,
+  	keywordstyle=\bfseries\color{blue!40!black},
+  	commentstyle=\itshape\color{green!40!black},
+  	identifierstyle=\color{black},
+  	stringstyle=\color{red},
+}
+
 
 \title{Cendrillon Sort}
 \subtitle{Shape Analysis}

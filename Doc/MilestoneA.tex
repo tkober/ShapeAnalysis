@@ -4,15 +4,15 @@ In diesem ersten Meilenstein soll die Erzeugung einer einfach-verketteten Liste 
 	\item Keine Objekte sind verloren gegangen und liegen unerreichbar auf dem Heap. Ihre Analyse soll zeigen, dass nach dem entsprechendem Programmteil auf dem Heap lediglich Linsenobjekte existieren, die von der Programmvariable \emph{LinsenTopf} aus erreichbar sind.
 	\item Alle Linsenobjekte sind korrekt erzeugt, d.h eine Linse ist entweder gut oder schlecht. Niemals hat sie beide oder keine der Eigenschaften. Aus den von Ihrer Analyse erzeugten Strukturen muss hervorgehen, dass obige Eigenschaft gilt, also genau eines der beiden Attribute \emph{istGut} und \emph{istSchlecht} den Wahrheitswert true besitzt.
 \end{itemize}
-Für jedes dieser beiden Verifikationsziele erhalten Sie maximal 20 Punkte.
 
 
 \subsection{Eingabestrukturen}
-...
+Da der zu untersuchende Programmabschnitt für die Erzeugung der Eingabestruktur von Meilenstein B zuständig ist, wird für dessen Analyse lediglich die leere Eingabestruktur benötigt. 
 
 
 \subsection{TVP}
 ...
+\textsnippet{../cendrillon_create.tvp}{20}{45}
 
 
 \subsection{Prädikate, Actions und Assertions}

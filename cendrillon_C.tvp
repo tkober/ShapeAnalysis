@@ -15,50 +15,50 @@
 // Transition system for a function that creates a linsenTopf
 
 
-L0  Set_Null_L(linsenTopf)					L0a			// Linse* linsenTopf = NULL;
+L0  Set_Null_L(linsenTopf)							L0a	// Linse* linsenTopf = NULL;
 // This corrects the program
-L0a Set_Null_L(guteLinsen)					L0b	// Linse* guteLinsen = NULL;
-L0b Set_Null_L(schlechteLinsen)			L1		// Linse* schlechteLinsen = NULL;
-L1  uninterpreted()							L3			// jump into loop as condition is i <= n and i is for the first iteration 1 and n at least 1
-L2  uninterpreted()							optional		// while (i <= n) {
-L2  uninterpreted()							L3
-L3  Malloc_L(linse)							L4			// 	linse = malloc(sizeof(Linse));
-L4	 uninterpreted()							L5			// 	linse->istGut = (rand() % 2) ? true: false;
-L4  uninterpreted()							L6
-L5  Set_Ist_Gut_True(linse)				L7
-L6	 Set_Ist_Gut_False(linse)				L7
-L7  Set_Ist_Schlecht_Opposite(linse)	L8			// 	linse->istSchlecht = !linse->istGut;
-L8	 Set_Next_L(linse, linsenTopf)		L9			// 	linse->next = linsenTopf;
-L9  Copy_Var_L(linsenTopf, linse)		L2			// 	linsenTopf = linse;
-																// }
+L0a Set_Null_L(guteLinsen)							L0b	// Linse* guteLinsen = NULL;
+L0b Set_Null_L(schlechteLinsen)					L1	// Linse* schlechteLinsen = NULL;
+L1  uninterpreted()											L3	// jump into loop as condition is i <= n and i is for the first iteration 1 and n at least 1
+L2  uninterpreted()											optional
+L2  uninterpreted()											L3	// while (i <= n) {
+L3  Malloc_L(linse)											L4	// 	linse = malloc(sizeof(Linse));
+L4	 uninterpreted()										L5	// 	linse->istGut = (rand() % 2) ? true: false;
+L4  uninterpreted()											L6
+L5  Set_Ist_Gut_True(linse)							L7
+L6	 Set_Ist_Gut_False(linse)						L7
+L7  Set_Ist_Schlecht_Opposite(linse)		L8	// 	linse->istSchlecht = !linse->istGut;
+L8	 Set_Next_L(linse, linsenTopf)			L9	// 	linse->next = linsenTopf;
+L9  Copy_Var_L(linsenTopf, linse)				L2	// 	linsenTopf = linse;
+																						// }
 
-optional Set_Null_L(linse)					L12	// clean result structures
+optional Set_Null_L(linse)							L12	// clean result structures
 
-L12 Copy_Var_L(topf, linsenTopf)			L13		// topf = LinsenTopf;
-L13 Is_Null_Var(topf)						exit		// while (topf) {
-L13 Is_Not_Null_Var(topf)					L14
-L14 Copy_Var_L(linse, topf)				L15		// 	linse = topf;
-L15 Get_Next_L(topf, topf)					L16		// 	topf = topf->next;
-L16 Is_Good(linse)							L17		// 	if (linse->istGut) {
-L16 Is_Not_Good(linse)						L20
-L17 Set_Next_Null_L(linse)					L18		//			linse->next = NULL;	//Additional statement for analysis, no semantic change
-L18 Set_Next_L(linse, guteLinsen)		L19		//			linse->next = guteLinsen;
-L19 Copy_Var_L(guteLinsen, linse)		L13		//			guteLinsen = linse;
-																//		} else {
-L20 Set_Next_Null_L(linse)					L21		//			linse->next = NULL;	//Additional statement for analysis, no semantic change
-L21 Set_Next_L(linse, schlechteLinsen) L22		//			linse->next = schlechteLinsen;
-L22 Copy_Var_L(schlechteLinsen, linse) L13		//			schlechteLinsen = linse;
-																//		}
-																// }
+L12 Copy_Var_L(topf, linsenTopf)				L13	// topf = LinsenTopf;
+L13 Is_Null_Var(topf)										exit// while (topf) {
+L13 Is_Not_Null_Var(topf)								L14
+L14 Copy_Var_L(linse, topf)							L15	// 	linse = topf;
+L15 Get_Next_L(topf, topf)							L16	// 	topf = topf->next;
+L16 Is_Good(linse)											L17	// 	if (linse->istGut) {
+L16 Is_Not_Good(linse)									L20
+L17 Set_Next_Null_L(linse)							L18	//			linse->next = NULL;	//Additional statement for analysis, no semantic change
+L18 Set_Next_L(linse, guteLinsen)				L19	//			linse->next = guteLinsen;
+L19 Copy_Var_L(guteLinsen, linse)				L13	//			guteLinsen = linse;
+																						//		} else {
+L20 Set_Next_Null_L(linse)							L21	//			linse->next = NULL;	//Additional statement for analysis, no semantic change
+L21 Set_Next_L(linse, schlechteLinsen)	L22	//			linse->next = schlechteLinsen;
+L22 Copy_Var_L(schlechteLinsen, linse)	L13	//			schlechteLinsen = linse;
+																						//		}
+																						// }
 
-exit Set_Null_L(linse)					exitA		//clean result structures
-exitA Set_Null_L(linsenTopf)			exitB
+exit Set_Null_L(linse)									exitA		//clean result structures
+exitA Set_Null_L(linsenTopf)						exitB
 
-exitB Assert_No_Reachable_Arbitrary()		error
-exitB Assert_No_Good_n_Bad()					error
-exitB Assert_Good_Linsen(guteLinsen)		error
-exitB Assert_Bad_Linsen(schlechteLinsen)  error
-exitB Assert_No_Leak_End(guteLinsen, schlechteLinsen) error
+exitB Assert_No_Reachable_Arbitrary()									error
+exitB Assert_No_Good_n_Bad()													error
+exitB Assert_Good_Linsen(guteLinsen)									error
+exitB Assert_Bad_Linsen(schlechteLinsen)  						error
+exitB Assert_No_Leak_End(guteLinsen, schlechteLinsen)	error
 
 %%
 

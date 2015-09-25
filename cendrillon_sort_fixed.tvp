@@ -14,13 +14,13 @@
 ////////////////////////////////////////////////////////////////////////
 // Transition system for a function that creates a linsenTopf
 
-L0  Set_Null_L(linsenTopf)					L0a			// Linse* linsenTopf = NULL;
+L0  Set_Null_L(linsenTopf)					L0a	// Linse* linsenTopf = NULL;
 // Program fix
-L0a Set_Null_L(guteLinsen)					L0b		// Linse* guteLinsen = NULL;
-L0b Set_Null_L(schlechteLinsen)			L1			// Linse* schlechteLinsen = NULL;
-L1  Malloc_L(linse)							L1a		// linse = malloc(sizeof(Linse));
-L1a uninterpreted()							L2			//	linse->istGut = (rand() % 2) ? true: false;
-L1a uninterpreted()							L2a
+L0a Set_Null_L(guteLinsen)					L0b	// Linse* guteLinsen = NULL;
+L0b Set_Null_L(schlechteLinsen)			L1	// Linse* schlechteLinsen = NULL;
+L1  Malloc_L(linse)									L1a	// linse = malloc(sizeof(Linse));
+L1a uninterpreted()									L2	// linse->istGut = (rand() % 2) ? true: false;
+L1a uninterpreted()									L2a
 L2  Set_Ist_Gut_True(linse)				L3
 L2a Set_Ist_Gut_False(linse)				L3
 L3  Set_Ist_Schlecht_Opposite(linse)	L4			// linse->istSchlecht = !linse->istGut;
