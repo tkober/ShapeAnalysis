@@ -18,8 +18,13 @@
 }
 
 \newcommand{\textsnippet}[3]{
+	\lstinputlisting[firstline=#2, lastline=#3]{#1}
+}
+
+\newcommand{\textsnippettiny}[3]{
 	\lstinputlisting[basicstyle=\tiny, firstline=#2, lastline=#3]{#1}
 }
+
 
 \newcommand{\csnippet}[3]{
 	\lstinputlisting[style=customc, firstline=#2, lastline=#3]{#1}
@@ -32,7 +37,6 @@
 }
 
 \lstdefinestyle{customc}{
-	basicstyle=\tiny,
   	belowcaptionskip=1\baselineskip,
   	breaklines=true,
   	language=C,
