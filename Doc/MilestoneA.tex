@@ -11,23 +11,32 @@ Da der zu untersuchende Programmabschnitt für die Erzeugung der Eingabestruktur
 
 
 \subsection{TVP}
-...
+Der TVP-Code wurde von Hand aus dem C-Code erzeugt. Das Statement zum Setzen des \emph{istGut} Attributs wurde über eine \emph{uninterpreted} Kante gelöst. Dadurch muss die Analyse beide Fälle gleichwertig betrachten. Einmal den Fall, dass die \texttt{rand()} Funktion eine gerade Zahl liefert und den anderen Fall, dass eine ungerade Zahl zurückgegeben wird. Dadurch sind die \emph{gut}- und \emph{schlecht}-Eigenschaften immer genau definiert.
+
+An den Schluss des Algorithmus wurden noch zwei weitere Anweisungen eingefügt, um die, für die Analyse irrelevanten, Variablen \emph{linse} und \emph{topf} auf Null zu setzen. Dadurch können die Ausgabestrukturen besser zusammengefasst werden, wodurch weniger Ausgabestrukturen entstehen. Das Ergebnis der Analyse wird allerdings nicht verändert.
+
 \textsnippettiny{../cendrillon_create.tvp}{20}{45}
 
 
 \subsection{Zusicherungen}
-...
+Die drei Zusicherungen garantieren die Integrität der Ausgabestrukturen. Es wird geprüft,...
+\begin{itemize}
+	\item ... ob die Linsen alle korrekt erzeugt wurden, d.h. nur entweder gut oder schlecht sind.
+	\item ... die Liste keine Invarianten hat
+	\item ... kein logisches Individuum vom Listenstart aus nicht erreichbar ist.
+\end{itemize}
 
 
 \subsection{Ausgabestrukturen}
-...
-\begin{description}
-	\item ... \analysispageref{Create}{5}
-	\item ... \analysispageref{Create}{6}
-	\item ... \analysispageref{Create}{7}
-	\item ... \analysispageref{Create}{8}
-	\item ... \analysispageref{Create}{9}
-	\item ... \analysispageref{Create}{10}
-	\item ... \analysispageref{Create}{11}
-	\item ... \analysispageref{Create}{12}
-\end{description}
+Folgende Ausgabestrukturen werden von der Analyse erzeugt:
+
+\begin{itemize}[$\rightarrow$]
+	\item Es wurden ausschließlich schlechte Linsen erzeugt (mind. 2, max. beliebig) \analysispageref{Create}{5}.
+	\item Es wurde nur eine gute Linse erzeugt \analysispageref{Create}{6}.
+	\item Es wurde eine gute Linse, anschließend beliebig viele schlechte Linsen erzeugt \analysispageref{Create}{7}.
+	\item Die erste Linse ist gut, anschließend gibt es beliebig viele gute und schlechte Linsen in beliebiger Reihenfolge \analysispageref{Create}{8}.
+	\item Die erste Linse ist schlecht, anschließend gibt es beliebig viele gute und schlechte Linsen in beliebiger Reihenfolge \analysispageref{Create}{9}.
+	\item Es wurde eine schlechte Linse erzeugt \analysispageref{Create}{10}.
+	\item Es wurde eine schlechte Linse, anschließend beliebig viele gute Linsen erzeugt \analysispageref{Create}{11}.
+	\item Es wurden ausschließlich gute Linsen erzeugt (mind. 2, max. beliebig). \analysispageref{Create}{12}.
+\end{itemize}
