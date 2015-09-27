@@ -2,23 +2,29 @@
 
 
 \subsection{Kernprädikate}
-...
+Zur Durchführung der Analysen mussten drei zusätzliche Prädikate definiert werden. Diese modellieren Kerneigenschaften der logischen Individuen und sollen im Folgenden genauer beschrieben werden.
 
 \subsubsection{\emph{istGut} und \emph{istSchlecht}}
-...
+Die Prädikate \textbf{istGut} und \textbf{istSchlecht} modellieren die \emph{gut}-, bzw. \emph{schlecht}-Eigenschaften einer Linse. Ist eines dieser Prädikate true muss das Gegenstück false sein, ansonsten ist die Linse inkonsistent, gemäß Aufgabenstellung. Des Weiteren sollen für jede Linse beide Eigenschaften wohl definiert sein, d.h. nicht auf 1/2 stehen.
+
 \textsnippet{../predicates.tvp}{16}{17}
 
 \subsubsection{\emph{isArbitrary}}
-...
+Dieses Prädikat gibt an, dass ein logisches Individuum eine beliebige Speicherzelle modelliert. Dadurch kann ermittelt werden, ob sich eine solche Zelle in einer Ausgabestruktur befindet, wie es vorkommen kann, wenn eine Variable nicht initialisiert wird.
+
 \textsnippet{../predicates.tvp}{19}{19}
 
 
 \subsection{Actions}
-...
+Actions werden dazu genutzt die logischen Strukturen zu aktualisieren.
 
-\subsubsection{\emph{Set\_Ist\_Gut\_Halb}, \emph{Set\_Ist\_Gut\_False} und \emph{Set\_Ist\_Gut\_True}}
-...
-\textsnippet{../actions.tvp}{12}{31}
+\subsubsection{\emph{Set\_Ist\_Gut\_False} und \emph{Set\_Ist\_Gut\_True}}
+Mit diesen beiden Actions kann die \emph{gut}-Eigenschaft einer Linse gesetzt werden. Dazu wird zunächst geprüft, ob das aktuelle logische Individuum das gesuchte ist (auf das die übergebene Variable zeigt) und dieses dann auf true/false gesetzt. Bei allen anderen logischen Individuen wird der vorherige Wert beibehalten.
+
+Bei der \emph{Set\_Ist\_Gut\_False} Action könnte der \textbf{(lhs(v) \& 0)} Teil weggelassen werden. Zur besseren Lesbarkeit wird dieser allerdings beibehalten.
+
+
+\textsnippet{../actions.tvp}{19}{31}
 
 
 \subsubsection{\emph{Set\_Ist\_Schlecht\_Opposite}}
