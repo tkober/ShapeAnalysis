@@ -2,3 +2,10 @@ cendrillon*.pdf
 *~
 Doc/.texpadtmp/*
 Doc.pdf
+Doc/*.aux
+Doc/*.out
+Doc/*.log
+Doc/*.bcf
+Doc/*.run.xml
+Doc/*.synctex.gz
+Doc/*.toc
