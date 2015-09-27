@@ -38,3 +38,33 @@ Bei der \emph{Set\_Ist\_Gut\_False} Action könnte der \textbf{(lhs(v) \& 0)} Te
 Diese beiden Actions werden für Verzweigungen genutzt. Die Kante wird genommen, falls das angegebene logische Individuum die \emph{gut}-Eigenschaft erfüllt, bzw. nicht erfüllt.
 
 \textsnippet{../actions.tvp}{40}{50}
+
+\subsection{Zusicherungen}
+Nach jeder Analyse werden einige Eigenschaften der Ausgabestrukturen geprüft, um deren Integrität festzustellen. Dafür werden folgende Zusicherungen (Assertions) genutzt.
+
+\subsubsection{\emph{Asert\_No\_Good\_n\_Bad}}
+Stellt sicher, dass kein logisches Individuum denselben Wahrheitswert für die \emph{gut}- und \emph{schlecht}-Eigenschaft hat (ausgenommen sind \emph{arbitrary} logische Individuen, da diese keine Linsen modellieren!).
+
+\textsnippet{../actions.tvp}{91}{95}
+
+\subsubsection{\emph{Asert\_No\_Reachable\_Arbitrary}}
+Stellt sicher, dass kein \emph{arbitrary} logisches Individuum von einem Programmzeiger aus erreichbar ist. Falls eins erreichbar ist, wurde eine Programmvariable nicht initialisiert, was zu einem Fehler führen könnte.
+
+\textsnippet{../actions.tvp}{67}{71}
+
+\subsubsection{\emph{Asert\_Good\_Linsen}}
+Stellt sicher, dass von einem Programmzeiger aus (in diesem Fall sollte nur der Programmzeiger \emph{guteLinsen} von Bedeutung sein) nur gute Linsen bzw. logische Individuen mit der \emph{gut}-Eigenschaft erreichbar sind.
+
+\textsnippet{../actions.tvp}{73}{77}
+
+\subsubsection{\emph{Asert\_Bad\_Linsen}}
+Stellt sicher, dass von einem Programmzeiger aus (in diesem Fall sollte nur der Programmzeiger \emph{schlechteLinsen} von Bedeutung sein) nur schlechte Linsen bzw. logische Individuen mit der \emph{schlecht}-Eigenschaft erreichbar sind.
+
+\textsnippet{../actions.tvp}{79}{83}
+
+\subsubsection{\emph{Asert\_No\_Leak\_End}}
+Stellt sicher, dass ein logisches Individuum nicht von dem guteLinsen und dem schlechteLinsen Zeiger aus erreichbar ist und, dass kein logisches Individuum, das nicht die \emph{arbitrary}-Eigenschaft erfüllt, nicht von diesen beiden Zeigern aus erreichbar ist.
+
+Diese Zusicherung sichert die Integrität der guteLinsen und schlechteLinsen Ausgaben.
+
+\textsnippet{../actions.tvp}{85}{89}

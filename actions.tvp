@@ -67,7 +67,7 @@
 %action Assert_No_Reachable_Arbitrary() {
 	%t "Assert_No_Arbitrary()"
 	%p E(v) isArbitrary(v) & |/{r[n, z](v): z in PVar}
-	%message ( E(v) isArbitrary(v) ) -> "There is a pointer pointing to an arbitrary logical individual, i.e., there is somewhere an uninitialized variable that is used!"
+	%message ( E(v) isArbitrary(v) & |/{r[n, z](v): z in PVar} ) -> "There is a pointer pointing to an arbitrary logical individual, i.e., there is somewhere an uninitialized variable that is used!"
 }
 
 %action Assert_Good_Linsen(lhs) {
