@@ -28,15 +28,13 @@ Bei der \emph{Set\_Ist\_Gut\_False} Action könnte der \textbf{(lhs(v) \& 0)} Te
 
 
 \subsubsection{\emph{Set\_Ist\_Schlecht\_Opposite}}
-...
+
+\emph{Set\_Ist\_Schlecht\_Opposite} setzt den Wert der \emph{schlecht}-Eigenschaft für ein angegebenes logisches Individuum auf das Gegenteil der \emph{gut}-Eigenschaft. Dazu wird geprüft, ob das aktuelle logische Individuum das gesuchte ist, wenn ja erhält es den gegenteiligen Wert der \emph{gut}-Eigenschaft, insofern es nicht die \emph{arbitrary}-Eigenschaft hat. Andernfalls behält es seinen Wert für \emph{istSchlecht}.
+
 \textsnippet{../actions.tvp}{33}{38}
 
 
 \subsubsection{\emph{Is\_Good} und \emph{Is\_Not\_Good}}
-...
+Diese beiden Actions werden für Verzweigungen genutzt. Die Kante wird genommen, falls das angegebene logische Individuum die \emph{gut}-Eigenschaft erfüllt, bzw. nicht erfüllt.
+
 \textsnippet{../actions.tvp}{40}{50}
-
-
-\subsubsection{\emph{Free\_Arbitrary}}
-...
-\textsnippet{../actions.tvp}{52}{62}
