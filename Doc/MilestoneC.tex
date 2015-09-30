@@ -7,7 +7,7 @@ Da für diesen Meilenstein auch die partielle Korrektheit von Meilenstein B geze
 
 
 \subsection{TVP}
-Für den TVP-Code gilt das gleiche wie in Meilenstein A und B.
+Für den TVP-Code gilt das gleiche wie in Meilenstein A und B. Wobei die Schleife, beginnend an Programmpunkt L2, mindestens einmal durchlaufen werden muss, da die Bedingung in jedem erfüllt wird (i = 1 und n >= 1). Dies wird dadurch modelliert, dass bei der ersten Iteration die Abbruchbedingung durch ein \emph{uninterpreted} Statement übersprungen wird.
 \textsnippettiny{../cendrillon_C.tvp}{18}{61}
 
 
@@ -21,9 +21,9 @@ Diese Analyse erzeugt die folgenden Ausgabestrukturen, welche mit denen aus Meil
 	\item Es sind nur gute Linsen im Topf gewesen, mindestens zwei.\analysispageref{C}{14}
 	\item Es waren mindestens zwei gute und genau eine schlechte Linse im Topf.\analysispageref{C}{15}
 	\item Es waren mindestens zwei schlechte und genau eine gute Linse im Topf.\analysispageref{C}{16}
-	\item Es war nur eine gute Linsen im Topf.\analysispageref{C}{17}
-	\item Es war nur eine schlechte Linsen im Topf.\analysispageref{C}{18}
+	\item Es war nur eine gute Linse im Topf.\analysispageref{C}{17}
+	\item Es war nur eine schlechte Linse im Topf.\analysispageref{C}{18}
 	\item Es waren sowohl mindestens zwei gute als auch mindestens zwei schlechte Linse im Topf.\analysispageref{C}{19}
 	\item Es sind nur schlechte Linsen im Topf gewesen, mindestens zwei.\analysispageref{C}{20}
-	\item Es sowohl genau eine gute als auch genau eine schlechte Linse im Topf.\analysispageref{C}{21}
+	\item Es waren sowohl genau eine gute als auch genau eine schlechte Linse im Topf.\analysispageref{C}{21}
 \end{itemize}

@@ -9,8 +9,9 @@ In diesem Meilenstein soll der Abbau einer einfach-verketteten Liste mit beliebi
 
 \subsection{Eingabestrukturen}
 Die hier angewandte Analyse berücksichtigt lediglich eine Eingabestruktur,\analysispageref{Sort}{3}.
-Bei dieser zeigen die Zeiger \emph{guteLinsen} und \emph{schlechteLinsen} jeweils auf eine beliebig lange Liste von Linsen, die auf jeden Fall \emph{gut} bzw. auf jeden Fall \emph{schlecht} sind.
-Die Zeiger für \emph{linsenTopf} bzw. \emph{topf} zeigen dagegen auf eine erzeugte Liste von Linsen, für die nicht bekannt ist, ob diese \emph{gut} oder \emph{schlecht} sind.
+Bei dieser zeigen alle Zeiger auf logische Individuen mit gesetztem \emph{isArbitrary} Prädikat. Dadurch kann überprüft werden, ob die Programmvariablen alle richtig initialisiert werden.
+
+Die eigentlichen Strukturen zum überprüfen der Implementierung werden, wie in Meilenstein A, vom Programmcode erzeugt. Das heißt der TVP Code zum Erzeugen der Liste ist dem Code zum Sortieren voran gestellt.
 
 \subsection{TVP}
 Der TVP-Code wurde von Hand aus dem C-Code erzeugt.
@@ -22,32 +23,33 @@ Ebenso wie bei Meilenstein A wurde auch hier die Problematik des Setzens von \em
 Am Ende der Analyse müssen folgende Zusicherungen erfüllt sein:
 \begin{itemize}
 	\item Kein logisches Individuum, für welches das \emph{arbitrary}-Prädikat wahr ist, darf über einen Programmzeiger erreichbar sein.
-	\item Für kein, über einen Programmzeiger erreichbares, logisches Individuum darf sowohl das Prädikat \emph{istGut} als auch das Prädikat \emph{istSchlecht} wahr sein.
+	\item Für kein, über einen Programmzeiger erreichbares, logisches Individuum darf sowohl das Prädikat \emph{istGut} als auch das Prädikat \emph{istSchlecht} wahr sein (außer das logische Individuum repräsentiert eine beliebige Speicherzelle, indem \emph{isArbitrary} gesetzt ist).
 	\item Über den Programmzeiger \emph{guteLinsen} können nur logische Individuen erreicht werden, für die das Prädikat \emph{istGut} wahr ist.
 	\item Über den Programmzeiger \emph{schlechteLinsen} können nur logische Individuen erreicht werden, für die das Prädikat \emph{istSchlecht} wahr ist.
-	\item Kein logisches Individuum darf sowohl über den Programmzeiger \emph{guteLinsen} als auch den Programmzeiger \emph{schlechteLinsen} erreichbar sein.
+	\item Jedes logische Individuum, dass nicht \emph{arbitrary} ist, muss entweder von \emph{guteLinsen} oder \emph{schlechteLinsen} aus erreichbar sein.
 \end{itemize}
 
 
 \subsubsection{Fehler}
 Am Programmpunkt \emph{exitB}\analysispageref{Sort}{5} ist zu erkennen, dass diese Zusicherungen für das verwendete TVP nicht erfüllt sind.
-Dies liegt daran, dass die Programmzeiger \emph{guteLinsen} und \emph{schlechteLinsen} nicht initialisiert werden.
+Dies liegt daran, dass die Programmzeiger \emph{guteLinsen} und \emph{schlechteLinsen} nicht initialisiert werden. Somit kann ein logisches Individuum mit der \emph{arbitrary}-Eigenschaft in der \emph{gute}- bzw. \emph{schlechteLinsen} Liste vorkommen.
 
 
 \subsection{Anpassungen}
 Durch die folgende Anpassung im TVP wird dieses Problem behoben.
 \textsnippettiny{../cendrillon_sort_fixed.tvp}{17}{21}
+Beziehungsweise im C-Code durch Initialisierung der beiden Pointer mit NULL.
 
 
 \subsection{Ausgabestrukturen}
 Nach der Anpassung des TVP-Codes generiert die Analyse folgende Ausgabestrukturen:
 \begin{itemize}[$\rightarrow$]
-	\item Es war nur eine gute Linsen im Topf.\analysispageref{Sort_Fixed}{5}
-	\item Es war nur eine schlechte Linsen im Topf.\analysispageref{Sort_Fixed}{6}
+	\item Es war nur eine gute Linse im Topf.\analysispageref{Sort_Fixed}{5}
+	\item Es war nur eine schlechte Linse im Topf.\analysispageref{Sort_Fixed}{6}
 	\item Es sind nur gute Linsen im Topf gewesen, mindestens zwei.\analysispageref{Sort_Fixed}{7}
 	\item Es sind nur schlechte Linsen im Topf gewesen, mindestens zwei.\analysispageref{Sort_Fixed}{8}
 	\item Es waren mindestens zwei gute und genau eine schlechte Linse im Topf.\analysispageref{Sort_Fixed}{9}
 	\item Es waren sowohl mindestens zwei gute als auch mindestens zwei schlechte Linse im Topf.\analysispageref{Sort_Fixed}{10}
-	\item Es sowohl genau eine gute als auch genau eine schlechte Linse im Topf.\analysispageref{Sort_Fixed}{11}
+	\item Es waren sowohl genau eine gute als auch genau eine schlechte Linse im Topf.\analysispageref{Sort_Fixed}{11}
 	\item Es waren mindestens zwei schlechte und genau eine gute Linse im Topf.\analysispageref{Sort_Fixed}{12}
 \end{itemize}

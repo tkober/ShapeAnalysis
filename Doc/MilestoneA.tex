@@ -13,7 +13,7 @@ Da der zu untersuchende Programmabschnitt für die Erzeugung der Eingabestruktur
 \subsection{TVP}
 Der TVP-Code wurde von Hand aus dem C-Code erzeugt. Das Statement zum Setzen des \emph{istGut} Attributs wurde über eine \emph{uninterpreted} Kante gelöst. Dadurch muss die Analyse beide Fälle gleichwertig betrachten. Einmal den Fall, dass die \texttt{rand()} Funktion eine gerade Zahl liefert und den anderen Fall, dass eine ungerade Zahl zurückgegeben wird. Dadurch sind die \emph{gut}- und \emph{schlecht}-Eigenschaften immer genau definiert.
 
-An den Schluss des Algorithmus wurden noch zwei weitere Anweisungen eingefügt, um die, für die Analyse irrelevanten, Variablen \emph{linse} und \emph{topf} auf Null zu setzen. Dadurch können die Ausgabestrukturen besser zusammengefasst werden, wodurch weniger Ausgabestrukturen entstehen. Das Ergebnis der Analyse wird allerdings nicht verändert.
+An den Schluss des Algorithmus wurden noch zwei weitere Anweisungen eingefügt, um die, für die Analyse irrelevanten, Variablen \emph{linse} und \emph{topf} auf Null zu setzen. Dadurch können die Ausgabestrukturen besser zusammengefasst werden, wodurch weniger Ausgabestrukturen entstehen. Das Ergebnis der Analyse wird dadurch allerdings nicht verändert.
 
 \textsnippettiny{../cendrillon_create.tvp}{20}{45}
 
